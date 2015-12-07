@@ -1,4 +1,4 @@
-cordova-inappbrowser-html [![Bower version](https://badge.fury.io/bo/cordova-inappbrowser-html.svg)](http://badge.fury.io/bo/cordova-inappbrowser-html)
+polymer-cordova-inappbrowser-html [![Bower version](https://badge.fury.io/bo/polymer-cordova-inappbrowser-html.svg)](http://badge.fury.io/bo/polymer-cordova-inappbrowser-html)
 =========
 
 Web component that opens external links InAppBrowser  [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
@@ -7,18 +7,18 @@ WebView replaces the app with the content of the external link.
 
 ## Usage
 
-`bower install cordova-inappbrowser-html`
+`bower install polymer-cordova-inappbrowser-html`
 
 ```html
-<cordova-inappbrowser-html>
+<polymer-cordova-inappbrowser-html>
   <a href="https://www.google.com">External link</a>
   <a href="#test">Internal link</a>
-</cordova-inappbrowser-html>
+</polymer-cordova-inappbrowser-html>
 ```
 
 ## Continuous integration
 
-[Travis-CI](https://travis-ci.org/Collaborne/cordova-inappbrowser-html) [![Travis state](https://travis-ci.org/Collaborne/cordova-inappbrowser-html.svg?branch=master)](https://travis-ci.org/Collaborne/cordova-inappbrowser-html)
+[Travis-CI](https://travis-ci.org/Collaborne/polymer-cordova-inappbrowser-html) [![Travis state](https://travis-ci.org/Collaborne/polymer-cordova-inappbrowser-html.svg?branch=master)](https://travis-ci.org/Collaborne/polymer-cordova-inappbrowser-html)
 
 
 ## License
