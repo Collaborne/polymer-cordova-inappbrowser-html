@@ -4,8 +4,6 @@ cordova-inappbrowser-html [![Bower version](https://badge.fury.io/bo/cordova-ina
 Web component that opens external links InAppBrowser  [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
 WebView replaces the app with the content of the external link.
 
-![Screenshot](/doc/screenshot.png "Screenshot")
-
 
 ## Usage
 
