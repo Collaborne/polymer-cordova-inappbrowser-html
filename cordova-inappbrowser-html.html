@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="cordova-inappbrowser-html">
+	<template>
+		<content></content>
+	</template>
+</dom-module>
+
+<script>
+
+(function() {
+
+	Polymer({
+		is: 'cordova-inappbrowser-html',
+		listeners: {
+			'tap': '_onTap',
+		},
+
+		// Private methods
+		_onTap: function(e) {
+			// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
+			var href = Polymer.dom(e).rootTarget.getAttribute('href');
+			if (typeof href === 'string' && !href.startsWith("#")) {
+				// Open in InAppBrowser
+				// @see https://github.com/apache/cordova-plugin-inappbrowser
+				window.open(href, "_blank", "location=yes,EnableViewPortScale=yes");
+			
+				// Don't change the WebView additional 
+				e.preventDefault();
+			}
+		},
+	});
+
+})();
+
+</script>

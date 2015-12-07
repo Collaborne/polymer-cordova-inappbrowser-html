@@ -1,0 +1,30 @@
+{
+  "name": "cordova-inappbrowser-html",
+  "version": "1.0.0",
+  "authors": [
+    "collaborne"
+  ],
+  "description": "Web component that opens external links In App Browser (Polymer 1.x)",
+  "main": "cordova-inappbrowser-html.html",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "cordova",
+    "inappbrowser",
+    "html"
+  ],
+  "license": "Apache 2",
+  "homepage": "https://github.com/Collaborne/cordova-inappbrowser-html",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "d3": "~3.5.6"
+  },
+  "devDependencies": {
+    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "web-component-tester": "*",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}
