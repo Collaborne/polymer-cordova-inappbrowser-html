@@ -1,8 +1,17 @@
 polymer-cordova-inappbrowser-html [![Bower version](https://badge.fury.io/bo/polymer-cordova-inappbrowser-html.svg)](http://badge.fury.io/bo/polymer-cordova-inappbrowser-html)
 =========
 
-Web component that opens external links InAppBrowser  [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
+Web component that opens external links InAppBrowser [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
 WebView replaces the app with the content of the external link.
+
+Similar like [html-echo](https://github.com/Collaborne/html-echo), the element uses the `html` to dumps HTML bound to a String property directly into the DOM because Polymer
+doesn't allow this otherwise right now.
+
+## Properties
+
+Property     | Type   | Description                                    
+------------ | ------ | -----------------------------------------------
+**html**     | String | Plain HTML that is directly dumped into the DOM
 
 
 ## Usage
@@ -10,9 +19,8 @@ WebView replaces the app with the content of the external link.
 `bower install polymer-cordova-inappbrowser-html`
 
 ```html
-<polymer-cordova-inappbrowser-html>
-  <a href="https://www.google.com">External link</a>
-  <a href="#test">Internal link</a>
+<polymer-cordova-inappbrowser-html
+  html='<a href="https://www.google.com">External link</a><a href="#test">Internal link</a>'>
 </polymer-cordova-inappbrowser-html>
 ```
 

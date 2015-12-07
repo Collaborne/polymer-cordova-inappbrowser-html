@@ -16,7 +16,7 @@
 	
 		<test-fixture id="TrivialElement">
 			<template>
-				<polymer-cordova-inappbrowser-html>Hello world</polymer-cordova-inappbrowser-html>
+				<polymer-cordova-inappbrowser-html html='<b>Test</b>'></polymer-cordova-inappbrowser-html>
 			</template>
 		</test-fixture>
 	
@@ -30,7 +30,16 @@
 					});
 					
 					test('sets initial inner HTML', function() {
-						expect(Polymer.dom(element).innerHTML).to.be.eql("Hello world");
+						expect(Polymer.dom(element).innerHTML).to.be.eql("<b>Test</b>");
+					});
+					
+					test('changes element inner HTML when html attribute changes', function() {
+						// Pre-condition
+						expect(Polymer.dom(element).innerHTML).to.be.eql("<b>Test</b>");
+
+						element.html = '<i>Changed</i>';
+
+						expect(Polymer.dom(element).innerHTML).to.be.eql("<i>Changed</i>");
 					});
 				});
 			});

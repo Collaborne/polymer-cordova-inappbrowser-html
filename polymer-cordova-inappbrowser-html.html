@@ -1,9 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <dom-module id="polymer-cordova-inappbrowser-html">
-	<template>
-		<content></content>
-	</template>
 </dom-module>
 
 <script>
@@ -12,11 +9,26 @@
 
 	Polymer({
 		is: 'polymer-cordova-inappbrowser-html',
+		properties: {
+			html: {
+				type: String,
+				value: '',
+				observer: '_refreshHtml'
+			}
+		},
+
 		listeners: {
 			'tap': '_onTap',
 		},
 
+		ready: function() {
+			this.innerHTML = this.html;
+		},
+
 		// Private methods
+		_refreshHtml: function() {
+			this.innerHTML = this.html;
+		},
 		_onTap: function(e) {
 			// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
 			var href = Polymer.dom(e).rootTarget.getAttribute('href');
