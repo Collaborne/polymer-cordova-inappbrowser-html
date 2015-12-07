@@ -17,30 +17,37 @@
 			}
 		},
 
-		listeners: {
-			'tap': '_onTap',
-		},
-
 		ready: function() {
-			this.innerHTML = this.html;
+			this._refreshHtml();
 		},
 
 		// Private methods
 		_refreshHtml: function() {
 			this.innerHTML = this.html;
-		},
-		_onTap: function(e) {
-			// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
-			var href = Polymer.dom(e).rootTarget.getAttribute('href');
-			if (typeof href === 'string' && !href.startsWith("#")) {
-				// Open in InAppBrowser
-				// @see https://github.com/apache/cordova-plugin-inappbrowser
-				window.open(href, "_blank", "location=yes,EnableViewPortScale=yes");
 			
-				// Don't change the WebView additional 
-				e.preventDefault();
-			}
-		},
+			// Wait until the DOM is updated
+			this.async(function() {
+				// Iterate over all anchors to manipulate the external links
+				var anchors = Polymer.dom(this.root).querySelectorAll('a');
+				for (var i = 0, len = anchors.length; i < len; i++) {
+					// Is this an external link?
+					var href = anchors[i].getAttribute('href');
+					if (typeof href === 'string' && !href.startsWith("#")) {
+						// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
+						anchors[i].onclick = (function(href) {
+							return function() {
+								// Open in InAppBrowser
+								// @see https://github.com/apache/cordova-plugin-inappbrowser
+								window.open(href, "_blank", "location=yes,EnableViewPortScale=yes");
+
+								// Block the browsers default behavior
+								return false;
+							}
+						})(href);
+					}
+				}
+			});
+		}
 	});
 
 })();
