@@ -19,8 +19,7 @@
     "**/.*"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "d3": "~3.5.6"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
     "test-fixture": "PolymerElements/test-fixture#^1.0.0",
