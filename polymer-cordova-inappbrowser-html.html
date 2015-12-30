@@ -1,5 +1,22 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<!--
+Web component that opens external links InAppBrowser [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
+WebView replaces the app with the content of the external link.
+
+Similar like [html-echo](https://github.com/Collaborne/html-echo), the element uses the `html` to dumps HTML bound to a String property directly into the DOM because Polymer
+doesn't allow this otherwise right now.
+
+### Example
+
+```html
+<polymer-cordova-inappbrowser-html
+  html='<a href="https://www.google.com">External link</a><a href="#test">Internal link</a>'>
+</polymer-cordova-inappbrowser-html>
+```
+
+@demo demo/index.html
+-->
 <dom-module id="polymer-cordova-inappbrowser-html">
 </dom-module>
 
@@ -10,6 +27,9 @@
 	Polymer({
 		is: 'polymer-cordova-inappbrowser-html',
 		properties: {
+			/**
+			 * Plain HTML that is directly dumped into the DOM
+			 */
 			html: {
 				type: String,
 				value: '',
