@@ -49,6 +49,7 @@
 						expect(element._isExternalLink('#hash')).to.be.false;
 					});
 					test('default to not-external for unexpected values', function() {
+						expect(element._isExternalLink('')).to.be.false;
 						expect(element._isExternalLink(null)).to.be.false;
 						expect(element._isExternalLink(undefined)).to.be.false;
 						expect(element._isExternalLink(42)).to.be.false;
