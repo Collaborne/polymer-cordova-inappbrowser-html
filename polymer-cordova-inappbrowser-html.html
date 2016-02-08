@@ -73,7 +73,7 @@ doesn't allow this otherwise right now.
 		 * Checks if this is an external link
 		 */
 		_isExternalLink(href) {
-			return typeof href === 'string' && href.length > 0 && !href.startsWith("#");
+			return typeof href === 'string' && href.length > 0 && href[0] !== '#';
 		}
 	});
 
