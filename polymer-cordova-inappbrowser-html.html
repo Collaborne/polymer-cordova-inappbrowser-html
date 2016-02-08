@@ -44,7 +44,7 @@ doesn't allow this otherwise right now.
 		// Private methods
 		_refreshHtml: function() {
 			this.innerHTML = this.html;
-			
+
 			// Wait until the DOM is updated
 			this.async(function() {
 				// Iterate over all anchors to manipulate the external links
@@ -52,7 +52,7 @@ doesn't allow this otherwise right now.
 				for (var i = 0, len = anchors.length; i < len; i++) {
 					// Is this an external link?
 					var href = anchors[i].getAttribute('href');
-					if (typeof href === 'string' && !href.startsWith("#")) {
+					if (this._isExternalLink(href)) {
 						// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
 						anchors[i].onclick = (function(href) {
 							return function() {
@@ -67,6 +67,13 @@ doesn't allow this otherwise right now.
 					}
 				}
 			});
+		},
+
+		/**
+		 * Checks if this is an external link
+		 */
+		_isExternalLink(href) {
+			return typeof href === 'string' && !href.startsWith("#");
 		}
 	});
 
