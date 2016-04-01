@@ -33,17 +33,37 @@ doesn't allow this otherwise right now.
 			html: {
 				type: String,
 				value: '',
-				observer: '_refreshHtml'
+			},
+
+			/**
+			 * Options for the new window.
+			 */
+			windowOptions: {
+				type: Object,
+				value: function() {
+					return {
+						'location': 'yes',
+						'enableViewPortScale': 'yes',
+					};
+				}
 			}
 		},
 
-		ready: function() {
-			this._refreshHtml();
-		},
+		observers: [
+			'_refreshHtml(html, windowOptions)'
+		],
 
 		// Private methods
-		_refreshHtml: function() {
-			this.innerHTML = this.html;
+		_refreshHtml: function(html, windowOptions) {
+			this.innerHTML = html;
+
+			// Calculate the actual options string for window.open
+			var linkOptions = Object.keys(windowOptions).reduce(function(result, key) {
+				if (result) {
+					result += ',';
+				}
+				return result += key + '=' + windowOptions[key];
+			}, '');
 
 			// Wait until the DOM is updated
 			this.async(function() {
@@ -58,7 +78,7 @@ doesn't allow this otherwise right now.
 							return function() {
 								// Open in InAppBrowser
 								// @see https://github.com/apache/cordova-plugin-inappbrowser
-								window.open(href, "_blank", "location=yes,enableViewPortScale=yes");
+								window.open(href, '_blank', linkOptions);
 
 								// Block the browsers default behavior
 								return false;
