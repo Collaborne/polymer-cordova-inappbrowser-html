@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer-cordova-aware/polymer-cordova-aware-behavior.html">
 
 <!--
 Web component that opens external links InAppBrowser [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
@@ -33,6 +34,7 @@ doesn't allow this otherwise right now.
 			html: {
 				type: String,
 				value: '',
+				observer: '_refreshHtml'
 			},
 
 			/**
@@ -40,31 +42,23 @@ doesn't allow this otherwise right now.
 			 */
 			windowOptions: {
 				type: Object,
-				value: function() {
-					return {
-						'location': 'yes',
-						'enableViewPortScale': 'yes',
-					};
-				}
 			}
 		},
 
+		behaviors: [
+			Polymer.CordovaAwareBehavior
+		],
+
 		observers: [
-			'_refreshHtml(html, windowOptions)'
+			'_setDefaultWindowOptions(isCordovaEnvironment)'
 		],
 
 		// Private methods
-		_refreshHtml: function(html, windowOptions) {
+		_refreshHtml: function(html) {
 			this.innerHTML = html;
 
 			// Calculate the actual options string for window.open
-			var linkOptions = Object.keys(windowOptions).reduce(function(result, key) {
-				if (result) {
-					result += ',';
-				}
-				return result += key + '=' + windowOptions[key];
-			}, '');
-
+			var linkOptions = this._calculateWindowOptionsString(this.windowOptions);
 			// Wait until the DOM is updated
 			this.async(function() {
 				// Iterate over all anchors to manipulate the external links
@@ -87,6 +81,27 @@ doesn't allow this otherwise right now.
 					}
 				}
 			});
+		},
+
+		_calculateWindowOptionsString: function(windowOptions) {
+			return windowOptions ? Object.keys(windowOptions).reduce(function(result, key) {
+				if (result) {
+					result += ',';
+				}
+				return result += key + '=' + windowOptions[key];
+			}, '') : '';
+		},
+
+		_setDefaultWindowOptions: function(isCordovaEnvironment) {
+			if (isCordovaEnvironment && !this.windowOptions) {
+				this.windowOptions = {
+					'location': 'yes',
+					'enableViewPortScale': 'yes',
+				};
+
+				// Force an update, if we already rendered the links once before.
+				this._refreshHtml(this.html);
+			}
 		},
 
 		/**
