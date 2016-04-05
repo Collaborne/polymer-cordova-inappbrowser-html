@@ -12,7 +12,7 @@
     "inappbrowser",
     "html"
   ],
-  "license": "Apache 2",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/Collaborne/polymer-cordova-inappbrowser-html",
   "ignore": [
     "**/.*"
