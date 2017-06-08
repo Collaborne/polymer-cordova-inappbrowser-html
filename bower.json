@@ -3,7 +3,7 @@
   "authors": [
     "collaborne"
   ],
-  "description": "Web component that opens external links In App Browser (Polymer 1.x)",
+  "description": "Web component that opens external links In App Browser (Polymer)",
   "main": "polymer-cordova-inappbrowser-html.html",
   "keywords": [
     "web-components",
@@ -18,13 +18,11 @@
     "**/.*"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "polymer-cordova-aware": "^1.0.2"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "polymer-cordova-aware": "^2.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
-    "web-component-tester": "*",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
+    "web-component-tester": "*"
   }
 }
