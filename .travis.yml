@@ -19,6 +19,3 @@ before_script:
 - $(npm bin)/polylint --no-recursion
 script:
 - xvfb-run $(npm bin)/wct
-after_success: '[ ${TRAVIS_PULL_REQUEST} = "false" ] && [ ${TRAVIS_BRANCH} = "master" ] && $(npm bin)/bower install -s https://${GH_TOKEN}@github.com/Collaborne/collaborne-build-tools.git && bower_components/collaborne-build-tools/gpages_build.sh Collaborne info@collaborne.com'
-env:
-  secure: "XEM7QKLNAyb+kbUdtlrnoXz37TKQNjdRbJ9M2mgk6OdoWm7DWeiYdSJ4ZFoaM7wDhzt1AZjafZ/NXafw8vaSs8alEI4Kp7WPvB1zfRnOISA1pdAr8NxB2nar4b+fGuzfC7XowIs4TAkFTXGuJBwx+whmBCWF3jM3eZxaZ9P7rA2+Y1dgGm5++mjVtqMW7lah32aHF4BOaX5zZLZZhFCgQ2eW2PXCFyMycDZePyZtJ4oBAWANunA8bPnJwovn8QTfcle+JP7tNT6fcQ1KDZTXAngqMAikAW7C+lpJhFXP3a+RmNy/mAP3VzMvleB7Gf4dtSjoAdiO4NHK+W59JlpojqQXGJNtPfqw94z4CBzw3JuIlrZtVh2eUk0xeMLCKPMbHmqS/rGXkYDpXAWgDqaaupzhF//Xx2xvAfvttK9UPPQk63vy65YPh9KjOIJu7/fW6PqZHQRPmP6v0Fg8Pke0CBMcwsDOK//eCBzbiTuLlMhzw0QB41Cg6h6fHA20zqjVltlXalCTcZvVWrWYjDZHtTYnu2kmGVHZjJsex/xy7fxrj85/7WxieW6qRj5d8ADJ8hRUL27fTGW078TsJKI21GMCrea2TMRxh7AMn+CxVpCZ58zefUXyFvAELL+WqS7xaUcAeoUIz1MgATJcG4D1IHkHRys22fXm/NTtg+NQM2Q="
