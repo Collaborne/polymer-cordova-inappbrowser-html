@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../polymer-cordova-aware/polymer-cordova-aware-behavior.html">
+<link rel="import" href="../polymer-cordova-aware/polymer-cordova-aware-mixin.html">
 
 <!--
 Web component that opens external links InAppBrowser [Polymer 1.x](https://www.polymer-project.org). This avoids in native Cordova apps that the
@@ -19,99 +19,104 @@ doesn't allow this otherwise right now.
 @demo demo/index.html
 -->
 <dom-module id="polymer-cordova-inappbrowser-html">
-</dom-module>
 
-<script>
+	<script>
 
-(function() {
+		class PolymerCordovaInappbrowserHtml extends Polymer.CordovaAwareMixin(Polymer.Element) {
 
-	Polymer({
-		is: 'polymer-cordova-inappbrowser-html',
-		properties: {
-			/**
-			 * Plain HTML that is directly dumped into the DOM
-			 */
-			html: {
-				type: String,
-				value: '',
-				observer: '_refreshHtml'
-			},
-
-			/**
-			 * Options for the new window.
-			 */
-			windowOptions: {
-				type: Object,
+			static get is() {
+				return 'polymer-cordova-inappbrowser-html';
 			}
-		},
 
-		behaviors: [
-			Polymer.CordovaAwareBehavior
-		],
+			static get properties() {
+				return {
+					/**
+					* Plain HTML that is directly dumped into the DOM
+					*/
+					html: {
+						type: String,
+						value: '',
+						observer: '_refreshHtml'
+					},
 
-		observers: [
-			'_setDefaultWindowOptions(isCordovaEnvironment)'
-		],
+					/**
+					* Options for the new window.
+					*/
+					windowOptions: {
+						type: Object,
+					}
+				};
+			}
 
-		// Private methods
-		_refreshHtml: function(html) {
-			this.innerHTML = html;
+			static get observers() {
+				return [
+					'_setDefaultWindowOptions(isCordovaEnvironment)'
+				];
+			}
 
-			// Calculate the actual options string for window.open
-			var linkOptions = this._calculateWindowOptionsString(this.windowOptions);
-			// Wait until the DOM is updated
-			this.async(function() {
-				// Iterate over all anchors to manipulate the external links
-				var anchors = Polymer.dom(this.root).querySelectorAll('a');
-				for (var i = 0, len = anchors.length; i < len; i++) {
-					// Is this an external link?
-					var href = anchors[i].getAttribute('href');
-					if (this._isExternalLink(href)) {
-						// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
-						anchors[i].onclick = (function(href) {
-							return function() {
+			// Private methods
+			_refreshHtml(html) {
+				this.innerHTML = html;
+
+				// Calculate the actual options string for window.open
+				const linkOptions = this._calculateWindowOptionsString(this.windowOptions);
+
+				// Wait until the DOM is updated
+				setTimeout(() => {
+					// Iterate over all anchors to manipulate the external links
+					const anchors = Polymer.dom(this.root).querySelectorAll('a');
+					for (let anchor of anchors) {
+						// Is this an external link?
+						const href = anchor.getAttribute('href');
+						if (this._isExternalLink(href)) {
+							// External links need to be opened in the InAppBrowser. This avoids in native Cordova apps that the WebView replaces the app with the content of the external link.
+							anchor.onclick = () => {
 								// Open in InAppBrowser
 								// @see https://github.com/apache/cordova-plugin-inappbrowser
 								window.open(href, '_blank', linkOptions);
 
 								// Block the browsers default behavior
 								return false;
-							}
-						})(href);
+							};
+						}
 					}
-				}
-			});
-		},
-
-		_calculateWindowOptionsString: function(windowOptions) {
-			return windowOptions ? Object.keys(windowOptions).reduce(function(result, key) {
-				if (result) {
-					result += ',';
-				}
-				return result += key + '=' + windowOptions[key];
-			}, '') : '';
-		},
-
-		_setDefaultWindowOptions: function(isCordovaEnvironment) {
-			if (isCordovaEnvironment && !this.windowOptions) {
-				this.windowOptions = {
-					'location': 'yes',
-					'enableViewPortScale': 'yes',
-				};
-
-				// Force an update, if we already rendered the links once before.
-				this._refreshHtml(this.html);
+				}, 1);
 			}
-		},
 
-		/**
-		 * Checks if this is an external link
-		 */
-		_isExternalLink(href) {
-			return typeof href === 'string' && href.length > 0 && href[0] !== '#';
+			_calculateWindowOptionsString(windowOptions) {
+				if (!windowOptions) {
+					return '';
+				}
+
+				return Object.keys(windowOptions)
+					// Create URL components
+					.map(key => `${key}=${windowOptions[key]}`)
+					// Join all components
+					.join(',');
+			}
+
+			_setDefaultWindowOptions(isCordovaEnvironment) {
+				if (isCordovaEnvironment && !this.windowOptions) {
+					this.windowOptions = {
+						'location': 'yes',
+						'enableViewPortScale': 'yes',
+					};
+
+					// Force an update, if we already rendered the links once before.
+					this._refreshHtml(this.html);
+				}
+			}
+
+			/**
+			* Checks if this is an external link
+			*/
+			_isExternalLink(href) {
+				return typeof href === 'string' && href.length > 0 && href[0] !== '#';
+			}
+
 		}
-	});
+		customElements.define(PolymerCordovaInappbrowserHtml.is, PolymerCordovaInappbrowserHtml);
 
-})();
+	</script>
 
-</script>
+</dom-module>

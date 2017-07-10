@@ -54,6 +54,16 @@
 						expect(element._isExternalLink(undefined)).to.be.false;
 						expect(element._isExternalLink(42)).to.be.false;
 					});
+
+					test('combines all windows options into an URL options string', function() {
+						const windowOptions = {
+							'location': 'yes',
+							'enableViewPortScale': 'yes',
+						};
+
+						const windowOptionsString = element._calculateWindowOptionsString(windowOptions);
+						expect(windowOptionsString).to.be.equal('location=yes,enableViewPortScale=yes');
+					});
 				});
 			});
 		</script>
