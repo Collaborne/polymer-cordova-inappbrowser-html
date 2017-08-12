@@ -16,7 +16,7 @@
 
 		<test-fixture id="TrivialElement">
 			<template>
-				<polymer-cordova-inappbrowser-html html='<b>Test</b>'></polymer-cordova-inappbrowser-html>
+				<polymer-cordova-inappbrowser-html></polymer-cordova-inappbrowser-html>
 			</template>
 		</test-fixture>
 
@@ -30,16 +30,19 @@
 					});
 
 					test('sets initial inner HTML', function() {
-						expect(element.innerHTML).to.be.eql("<b>Test</b>");
+						element.html = '<b>Test</b>';
+						expect(element.innerHTML).to.be.eql('<b>Test</b>');
 					});
 
 					test('changes element inner HTML when html attribute changes', function() {
+						element.html = '<b>Test</b>';
+
 						// Pre-condition
-						expect(element.innerHTML).to.be.eql("<b>Test</b>");
+						expect(element.innerHTML).to.be.eql('<b>Test</b>');
 
 						element.html = '<i>Changed</i>';
 
-						expect(element.innerHTML).to.be.eql("<i>Changed</i>");
+						expect(element.innerHTML).to.be.eql('<i>Changed</i>');
 					});
 
 					test('detects external links', function() {
@@ -63,6 +66,16 @@
 
 						const windowOptionsString = element._calculateWindowOptionsString(windowOptions);
 						expect(windowOptionsString).to.be.equal('location=yes,enableViewPortScale=yes');
+					});
+
+					test('sets inner HTML to empty for undefined', function() {
+						element.html = undefined;
+						expect(element.innerHTML).to.be.eql('');
+					});
+
+					test('sets inner HTML to empty for null', function() {
+						element.html = null;
+						expect(element.innerHTML).to.be.eql('');
 					});
 				});
 			});

@@ -56,7 +56,7 @@ doesn't allow this otherwise right now.
 
 			// Private methods
 			_refreshHtml(html) {
-				this.innerHTML = html;
+				this.innerHTML = html || '';
 
 				// Calculate the actual options string for window.open
 				const linkOptions = this._calculateWindowOptionsString(this.windowOptions);
