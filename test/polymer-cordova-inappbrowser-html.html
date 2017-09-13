@@ -31,18 +31,18 @@
 
 					test('sets initial inner HTML', function() {
 						element.html = '<b>Test</b>';
-						expect(element.innerHTML).to.be.eql('<b>Test</b>');
+						expect(element.$.container.innerHTML).to.be.eql('<b>Test</b>');
 					});
 
 					test('changes element inner HTML when html attribute changes', function() {
 						element.html = '<b>Test</b>';
 
 						// Pre-condition
-						expect(element.innerHTML).to.be.eql('<b>Test</b>');
+						expect(element.$.container.innerHTML).to.be.eql('<b>Test</b>');
 
 						element.html = '<i>Changed</i>';
 
-						expect(element.innerHTML).to.be.eql('<i>Changed</i>');
+						expect(element.$.container.innerHTML).to.be.eql('<i>Changed</i>');
 					});
 
 					test('detects external links', function() {
