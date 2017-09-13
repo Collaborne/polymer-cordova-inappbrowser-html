@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../shadycss/apply-shim.html">
 <link rel="import" href="../polymer-cordova-aware/polymer-cordova-aware-mixin.html">
 
 <!--
@@ -19,6 +20,19 @@ doesn't allow this otherwise right now.
 @demo demo/index.html
 -->
 <dom-module id="polymer-cordova-inappbrowser-html">
+
+	<template>
+		<style>
+			#container {
+				@apply --polymer-cordova-inappbrowser-html-container;
+			}
+
+			#container a {
+				@apply --polymer-cordova-inappbrowser-html-anchor;
+			}
+		</style>
+		<div id="container"></div>
+	</template>
 
 	<script>
 
@@ -56,7 +70,7 @@ doesn't allow this otherwise right now.
 
 			// Private methods
 			_refreshHtml(html) {
-				this.innerHTML = html || '';
+				this.$.container.innerHTML = html || '';
 
 				// Calculate the actual options string for window.open
 				const linkOptions = this._calculateWindowOptionsString(this.windowOptions);
@@ -64,7 +78,7 @@ doesn't allow this otherwise right now.
 				// Wait until the DOM is updated
 				setTimeout(() => {
 					// Iterate over all anchors to manipulate the external links
-					const anchors = this.querySelectorAll('a');
+					const anchors = this.shadowRoot.querySelectorAll('a');
 					for (let anchor of anchors) {
 						// Is this an external link?
 						const href = anchor.getAttribute('href');
@@ -80,6 +94,7 @@ doesn't allow this otherwise right now.
 							};
 						}
 					}
+					this.updateStyles();
 				}, 1);
 			}
 
