@@ -64,7 +64,7 @@ doesn't allow this otherwise right now.
 				// Wait until the DOM is updated
 				setTimeout(() => {
 					// Iterate over all anchors to manipulate the external links
-					const anchors = Polymer.dom(this.root).querySelectorAll('a');
+					const anchors = this.querySelectorAll('a');
 					for (let anchor of anchors) {
 						// Is this an external link?
 						const href = anchor.getAttribute('href');
