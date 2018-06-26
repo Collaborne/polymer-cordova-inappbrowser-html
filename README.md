@@ -1,4 +1,7 @@
 polymer-cordova-inappbrowser-html [![Bower version](https://badge.fury.io/bo/polymer-cordova-inappbrowser-html.svg)](http://badge.fury.io/bo/polymer-cordova-inappbrowser-html) [![Travis state](https://travis-ci.org/Collaborne/polymer-cordova-inappbrowser-html.svg?branch=master)](https://travis-ci.org/Collaborne/polymer-cordova-inappbrowser-html) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/polymer-cordova-inappbrowser-html)
+
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/Collabornepolymer-cordova-inappbrowser-html)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/Collabornepolymer-cordova-inappbrowser-html.svg)](https://vaadin.com/directory/component/Collabornepolymer-cordova-inappbrowser-html)
 =========
 
 Web component that opens external links InAppBrowser [Polymer](https://www.polymer-project.org). This avoids in native Cordova apps that the
